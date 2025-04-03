@@ -1,6 +1,6 @@
 <div id="result">
   <button
-    hx-post="{% url 'update_component' 'counter' %}"
+    hx-post="{% url 'counter' %}"
     hx-vals='{"action": "decrement"}'
     hx-target="#result"
   >
@@ -8,7 +8,7 @@
   </button>
   <span>{{ count }}</span>
   <button
-    hx-post="{% url 'update_component' 'counter' %}"
+    hx-post="{% url 'counter' %}"
     hx-vals='{"action": "increment"}'
     hx-target="#result"
   >

@@ -1,25 +1,29 @@
+from django.views.generic import TemplateView
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.template.loader import render_to_string
-from .component_manager import ComponentManager
+from django.http import HttpResponse
+
+from .manager import ComponentManager
 
 
-def counter(request):
-    manager = ComponentManager(request)
-    component = manager.load_component("counter")
+class HornetlView(TemplateView):
 
-    html = render_to_string("components/counter.html", component.__dict__)
-    return render(request, "hornet.html", {"component_html": html})
+    def render_to_component(self, html):
+        html = render_to_string(
+            f"components/{self.component_name}.html", self.component.__dict__
+        )
+        return render(self.request, self.template_name, {"component_html": html})
 
+    def update_to_component(self):
+        self.manager.save_component(self.component_name, self.component)
+        html = render_to_string(f"components/{self.component_name}.html", self.state)
+        return HttpResponse(html)
 
-def update_component(request, name):
-    manager = ComponentManager(request)
-    component = manager.load_component(name)
-    state = component.__dict__
-    if "increment" in request.POST["action"]:
-        state["count"] = int(state["count"]) + 1
-    elif "decrement" in request.POST["action"]:
-        state["count"] = int(state["count"]) - 1
-    manager.save_component(name, component)
-    html = render_to_string(f"components/{name}.html", state)
-    return HttpResponse(html)
+    def dispatch(self, *args, **kwargs):
+        self.manager = ComponentManager(self.request)
+        self.component = self.manager.load_component(self.component_name)
+        self.state = self.component.__dict__
+        self.html = render_to_string(
+            f"components/{self.component_name}.html", self.state
+        )
+        return super(HornetlView, self).dispatch(*args, **kwargs)

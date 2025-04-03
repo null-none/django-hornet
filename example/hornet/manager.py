@@ -1,4 +1,5 @@
 import importlib
+from django.urls import resolve
 
 
 class ComponentManager:
@@ -10,7 +11,8 @@ class ComponentManager:
 
     def load_component(self, name):
         try:
-            module = importlib.import_module(f"hornet.components.{name}")
+            app_name = str(self.request.resolver_match._func_path).split(".")[0]
+            module = importlib.import_module(f"{app_name}.components.{name}")
             component_class = getattr(module, self._class_name(name))
 
             state = self.request.session.get(self._session_key(name), {})
