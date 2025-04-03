@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from .component_manager import ComponentManager
 
 
-def hornet(request):
+def counter(request):
     manager = ComponentManager(request)
     component = manager.load_component("counter")
 
@@ -15,10 +15,11 @@ def hornet(request):
 def update_component(request, name):
     manager = ComponentManager(request)
     component = manager.load_component(name)
-    for key in request.POST:
-        method = getattr(component, key, None)
-        if callable(method):
-            method()
+    state = component.__dict__
+    if "increment" in request.POST["action"]:
+        state["count"] = int(state["count"]) + 1
+    elif "decrement" in request.POST["action"]:
+        state["count"] = int(state["count"]) - 1
     manager.save_component(name, component)
-    html = render_to_string(f"components/{name}.html", component.__dict__)
+    html = render_to_string(f"components/{name}.html", state)
     return HttpResponse(html)

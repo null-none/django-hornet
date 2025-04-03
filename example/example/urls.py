@@ -22,6 +22,6 @@ from hornet import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.hornet, name="hornet"),
+    path("", views.counter, name="counter"),
     path("hornet/update/<str:name>/", views.update_component, name="update_component"),
 ]

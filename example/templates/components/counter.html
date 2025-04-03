@@ -1,8 +1,17 @@
-<div hx-post="{% url 'update_component' 'counter' %}"
-     hx-target="this"
-     hx-swap="outerHTML">
-  <p>Count: {{ count }}</p>
-  <input type="hidden" name="count" value="{{ count }}">
-  <button name="increment" type="submit">+</button>
-  <button name="decrement" type="submit">-</button>
+<div id="result">
+  <button
+    hx-post="{% url 'update_component' 'counter' %}"
+    hx-vals='{"action": "decrement"}'
+    hx-target="#result"
+  >
+    -
+  </button>
+  <span>{{ count }}</span>
+  <button
+    hx-post="{% url 'update_component' 'counter' %}"
+    hx-vals='{"action": "increment"}'
+    hx-target="#result"
+  >
+    +
+  </button>
 </div>
