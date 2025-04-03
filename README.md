@@ -1,5 +1,20 @@
 ## django-hornet
 
+
+```bash
+pip install django-hornet
+```
+
+```python
+MIDDLEWARE = [
+    ...
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "hornet.middleware.HtmxMiddleware",
+    ...
+]
+```
+
+
 ```python
 from hornet.views import HornetlView
 
