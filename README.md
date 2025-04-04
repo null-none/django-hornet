@@ -14,6 +14,7 @@ MIDDLEWARE = [
 ]
 ```
 
+#### Example
 
 ```python
 from hornet.views import HornetlView
