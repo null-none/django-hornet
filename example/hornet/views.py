@@ -8,10 +8,12 @@ from .manager import ComponentManager
 
 class HornetlView(TemplateView):
 
-    def render_to_component(self, html):
-        html = render_to_string(
-            f"components/{self.component_name}.html", self.component.__dict__
-        )
+    def render_to_component(self, state=None):
+        if not state is None:
+            self.state = state
+        else:
+            self.state = self.component.__dict__
+        html = render_to_string(f"components/{self.component_name}.html", self.state)
         return render(self.request, self.template_name, {"component_html": html})
 
     def update_to_component(self):

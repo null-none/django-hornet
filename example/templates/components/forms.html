@@ -1,0 +1,7 @@
+<div id="result">
+  <h3>Example Form</h3>
+  <form hx-post="{% url 'forms' %}" hx-target="#result">
+    {{ form }}
+    <button class="btn primary">Submit</button>
+  </form>
+</div>
