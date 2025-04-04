@@ -31,15 +31,8 @@ class FormsView(HornetlView):
 
     def post(self, request, *args, **kwargs):
         form = ExampleForm(request.POST)
-        if form.is_valid():
-            self.state = {
-                "form": form,
-                "email": form.cleaned_data.get("email"),
-                "first_name": form.cleaned_data.get("first_name"),
-                "last_name": form.cleaned_data.get("last_name"),
-            }
-        else:
-            self.state = {
-                "form": form,
-            }
+        form.is_valid()
+        self.state = {
+            "form": form,
+        }
         return self.update_to_component()
