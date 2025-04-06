@@ -33,7 +33,6 @@ class CounterView(HornetlView):
         elif action == "decrement":
             self.component.decrement()
         return self.update_to_component()
-
 ```
 
 ```html
