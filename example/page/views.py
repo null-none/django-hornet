@@ -24,15 +24,21 @@ class FormsView(HornetlView):
     component_name = "forms"
 
     def get(self, request, *args, **kwargs):
-        self.state = {
-            "form": ExampleForm(),
-        }
-        return self.render_to_component(self.state)
+        return self.render_to_component()
 
     def post(self, request, *args, **kwargs):
-        form = ExampleForm(request.POST)
+        form = ExampleForm(self.request.POST)
         form.is_valid()
-        self.state = {
-            "form": form,
-        }
+        self.state["form"] = form
+        return self.update_to_component()
+
+
+class ExampleView(HornetlView):
+    template_name = "example.html"
+    component_name = "example"
+
+    def get(self, request, *args, **kwargs):
+        return self.render_to_component()
+
+    def post(self, request, *args, **kwargs):
         return self.update_to_component()

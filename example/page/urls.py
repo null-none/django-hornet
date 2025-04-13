@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 
-from .views import CounterView, FormsView
+from .views import CounterView, FormsView, ExampleView
 
 urlpatterns = [
     path(
@@ -12,5 +12,10 @@ urlpatterns = [
         "/forms",
         FormsView.as_view(),
         name="forms",
+    ),
+    path(
+        "/example",
+        ExampleView.as_view(),
+        name="example",
     ),
 ]

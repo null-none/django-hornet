@@ -32,6 +32,8 @@ class ComponentManager:
             for key in dir(component)
             if not key.startswith("__") and not callable(getattr(component, key))
         }
+        if "form" in state:
+            del state["form"]
         self.request.session[self._session_key(name)] = state
 
     def _class_name(self, name):

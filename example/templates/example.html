@@ -3,5 +3,6 @@
 {% load hornet_heplers %}
 
 {% block content %}
-  {{ component_html|safe }}
+  {% load_component "page" "counter" %}
+  {% load_component "page" "forms" %}
 {% endblock %}

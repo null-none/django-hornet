@@ -6,7 +6,7 @@
   <title>Hornet</title>
   <script src="{% static 'js/htmx.min.js' %}"></script>
 </head>
-<bod hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
   {% block content %}{% endblock %}
 </body>
 </html>
