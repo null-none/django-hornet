@@ -28,4 +28,4 @@ class HornetView(TemplateView):
         self.html = render_to_string(
             f"components/{self.component_name}.html", self.state
         )
-        return super(HornetlView, self).dispatch(*args, **kwargs)
+        return super(HornetView, self).dispatch(*args, **kwargs)
