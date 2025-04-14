@@ -9,7 +9,7 @@ pip install django-hornet
 MIDDLEWARE = [
     ...
     "django.middleware.csrf.CsrfViewMiddleware",
-    "hornet.middleware.HtmxMiddleware",
+    "django_hornet.middleware.HtmxMiddleware",
     ...
 ]
 ```
@@ -17,7 +17,7 @@ MIDDLEWARE = [
 #### Example
 
 ```python
-from hornet.views import HornetlView
+from django_hornet.views import HornetlView
 
 class CounterView(HornetlView):
     template_name = "counter.html"
