@@ -1,8 +1,9 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="django-hornet",
-    packages=["src"],
+    ppackages=find_packages(), 
+    
     version="0.0.1",
     description="Django Hornet Wrapper",
     url="https://github.com/null-none/django-hornet",
