@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class HorrnetConfig(AppConfig):
+class DjangoHorrnetConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "hornet"
+    name = "django_hornet"
