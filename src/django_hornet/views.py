@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from .manager import ComponentManager
 
 
-class HornetlView(TemplateView):
+class HornetView(TemplateView):
 
     def render_to_component(self, state=None):
         if not state is None:
