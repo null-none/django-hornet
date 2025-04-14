@@ -7,5 +7,3 @@ class FormsComponent:
         self.last_name = last_name
         self.email = email
         self.form = ExampleForm()
-
-    
