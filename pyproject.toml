@@ -21,7 +21,7 @@ requires-python = ">=3.9"
 dev = ["pip-tools"]
 
 [project.urls]
-Homepage = "https://github.com/null-none/django-hornet
+Homepage = "https://github.com/null-none/django-hornet"
 
 [tools.setuptools]
 packages = ["src"]
