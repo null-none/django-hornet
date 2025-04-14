@@ -17,9 +17,9 @@ MIDDLEWARE = [
 #### Example
 
 ```python
-from django_hornet.views import HornetlView
+from django_hornet.views import HornetView
 
-class CounterView(HornetlView):
+class CounterView(HornetView):
     template_name = "counter.html"
     component_name = "counter"
 
