@@ -3,7 +3,7 @@ requires = ["setuptools>=42", "wheel"]
 
 [project]
 name = "django-hornet"
-version = "0.0.5"
+version = "0.1.0"
 description = "Django Hornet Wrapper"
 readme = "README.md"
 authors = [{ name = "Kalinin Mitko", email = "kalinin.mitko@gmail.com" }]

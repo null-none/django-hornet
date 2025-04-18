@@ -8,24 +8,26 @@ from .manager import ComponentManager
 
 class HornetView(TemplateView):
 
+    def template_wrapper(self):
+        return render_to_string(
+            f"components/{str(self.component_name).replace('_', '/')}.html", self.state
+        )
+
     def render_to_component(self, state=None):
         if not state is None:
             self.state = state
         else:
             self.state = self.component.__dict__
-        html = render_to_string(f"components/{self.component_name}.html", self.state)
-        return render(self.request, self.template_name, {"component_html": html})
+        return render(self.request, self.template_name, {"component_html": self.template_wrapper()})
 
     def update_to_component(self):
         self.manager.save_component(self.component_name, self.component)
-        html = render_to_string(f"components/{self.component_name}.html", self.state)
+        html = self.template_wrapper()
         return HttpResponse(html)
 
     def dispatch(self, *args, **kwargs):
         self.manager = ComponentManager(self.request)
         self.component = self.manager.load_component(self.component_name)
         self.state = self.component.__dict__
-        self.html = render_to_string(
-            f"components/{self.component_name}.html", self.state
-        )
+        self.html = self.template_wrapper()
         return super(HornetView, self).dispatch(*args, **kwargs)

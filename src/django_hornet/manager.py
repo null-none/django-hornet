@@ -13,6 +13,7 @@ class ComponentManager:
         try:
             app_name = str(self.request.resolver_match._func_path).split(".")[0]
             module = importlib.import_module(f"{app_name}.components.{name}")
+
             component_class = getattr(module, self._class_name(name))
 
             state = self.request.session.get(self._session_key(name), {})
@@ -22,7 +23,6 @@ class ComponentManager:
                 setattr(component, key, value)
 
             return component
-
         except (ModuleNotFoundError, AttributeError) as e:
             raise Exception(f"Component '{name}' not found: {e}")
 
@@ -37,4 +37,7 @@ class ComponentManager:
         self.request.session[self._session_key(name)] = state
 
     def _class_name(self, name):
-        return f"{name.capitalize()}Component"
+        name = name.split("_")
+        name = [n.capitalize() for n in name]
+        name = "".join(name)
+        return f"{name}Component"

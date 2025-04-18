@@ -14,5 +14,5 @@ def load_component(context, app_name, component_name):
     manager = ComponentManager(request)
     component = manager.load_component(component_name)
     state = component.__dict__
-    html = render_to_string(f"components/{component_name}.html", state)
+    html = render_to_string(f"components/{str(component_name).replace('_', '/')}.html", state)
     return html
