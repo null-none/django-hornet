@@ -34,6 +34,8 @@ class ComponentManager:
         }
         if "form" in state:
             del state["form"]
+        if "request" in state:
+            del state["request"]
         self.request.session[self._session_key(name)] = state
 
     def _class_name(self, name):
