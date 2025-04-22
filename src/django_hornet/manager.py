@@ -3,15 +3,19 @@ from django.urls import resolve
 
 
 class ComponentManager:
-    def __init__(self, request):
+    def __init__(self, request, app_name=None):
         self.request = request
+        self.app_name = app_name
 
     def _session_key(self, name):
         return f"component_state__{name}"
 
     def load_component(self, name):
         try:
-            app_name = str(self.request.resolver_match._func_path).split(".")[0]
+            if self.app_name:
+                app_name = self.app_name
+            else:
+                app_name = str(self.request.resolver_match._func_path).split(".")[0]
             module = importlib.import_module(f"{app_name}.components.{name}")
 
             component_class = getattr(module, self._class_name(name))
