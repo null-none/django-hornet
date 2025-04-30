@@ -20,6 +20,11 @@ class HornetView(TemplateView):
             self.state = self.component.__dict__
         return render(self.request, self.template_name, {"component_html": self.template_wrapper()})
 
+    def update_to_html(self):
+        self.manager.save_component(self.component_name, self.component)
+        html = self.template_wrapper()
+        return html
+    
     def update_to_component(self):
         self.manager.save_component(self.component_name, self.component)
         html = self.template_wrapper()
