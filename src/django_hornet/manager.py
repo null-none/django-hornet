@@ -3,9 +3,10 @@ from django.urls import resolve
 
 
 class ComponentManager:
-    def __init__(self, request, app_name=None):
+    def __init__(self, request, app_name=None, key=None):
         self.request = request
         self.app_name = app_name
+        self.key = key
 
     def _session_key(self, name):
         return f"component_state__{name}"
